@@ -1,0 +1,31 @@
+@import "../../app.scss";
+
+.watch {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--main-color);
+  overflow: hidden;
+
+
+  .back {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    @include mobile {
+
+      object-fit: contain;
+    }
+  }
+}
