@@ -6,9 +6,9 @@ import {
   ThumbDownOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
+import { axiosInstance } from "../../utils/axios";
 
 export default function ListItem({ index, item }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -18,7 +18,7 @@ export default function ListItem({ index, item }) {
   useEffect(() => {
     const getMovie = async () => {
       try {
-        const res = await axios.get("/movies/find/" + item, {
+        const res = await axiosInstance.get("/movies/find/" + item, {
           headers: {
             token:
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,

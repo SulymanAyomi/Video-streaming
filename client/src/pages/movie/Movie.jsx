@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import "./movie.scss";
-import axios from "axios";
+import { axiosInstance } from "../../utils/axios";
 
 const Movie = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ const Movie = () => {
         try {
           const genre = movie.genre.join();
           const type = movie.isSeries ? 1 : 0;
-          const res = await axios.get(
+          const res = await axiosInstance.get(
             "/movies/recommendations?" +
               new URLSearchParams(
                 {
