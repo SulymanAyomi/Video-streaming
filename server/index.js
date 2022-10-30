@@ -19,10 +19,10 @@ mongoose
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
-app.use("/api/movies", movieRoute);
-app.use("/api/lists", listRoute);
+app.use("/netflix/api/auth", authRoute);
+app.use("/netflix/api/users", userRoute);
+app.use("/netflix/api/movies", movieRoute);
+app.use("/netflix/api/lists", listRoute);
 
 app.listen(8800, () => {
   console.log("Backend server is running!");

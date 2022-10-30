@@ -28,7 +28,7 @@ const App = () => {
     return children;
   };
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="coolstream">
       <Routes>
         <Route
           exact
