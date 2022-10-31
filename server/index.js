@@ -31,7 +31,6 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(mongoSanitize());
 app.use(cors());
-app.use(morgan("dev"));
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/movies", movieRoute);
