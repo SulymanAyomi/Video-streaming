@@ -5,6 +5,15 @@ const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  const user2 = await User.findOne({ username: req.body.username });
+  if (user) {
+    return res.status(401).json("Email already exist!");
+  }
+  if (user2) {
+    return res.status(401).json("Username already registered");
+  }
+
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -17,6 +26,7 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -31,7 +41,7 @@ router.post("/login", async (req, res) => {
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-
+    console.log(originalPassword);
     originalPassword !== req.body.password &&
       res.status(401).json("Wrong password or username!");
 

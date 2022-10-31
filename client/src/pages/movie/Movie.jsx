@@ -15,7 +15,7 @@ const Movie = () => {
   const [recom, setRecom] = useState([]);
 
   useEffect(() => {
-    window.title = movie.title;
+    document.title = movie.title;
     if (movie) {
       const getRecommendation = async () => {
         try {

@@ -8,6 +8,7 @@ import { axiosInstance } from "../../utils/axios";
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
+  document.title = "Coolstream";
 
   useEffect(() => {
     const getRandomLists = async () => {

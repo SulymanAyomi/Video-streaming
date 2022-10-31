@@ -9,9 +9,8 @@ import { AuthContext } from "./authContext/AuthContext";
 import Movie from "./pages/movie/Movie";
 
 const App = () => {
+  const { user } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
-
     if (!user) {
       return <Navigate to="/register" />;
     }
@@ -19,8 +18,6 @@ const App = () => {
     return children;
   };
   const UnProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
-
     if (user) {
       return <Navigate to="/" />;
     }

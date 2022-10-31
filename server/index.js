@@ -7,6 +7,14 @@ const userRoute = require("./routes/users");
 const movieRoute = require("./routes/movies");
 const listRoute = require("./routes/lists");
 const morgan = require("morgan");
+const cors = require("cors");
+const mongoSanitize = require("express-mongo-sanitize");
+var fs = require("fs");
+var path = require("path");
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a",
+});
 
 dotenv.config();
 
@@ -17,12 +25,17 @@ mongoose
     console.error(err);
   });
 
+// setup the logger
+app.use(morgan("combined", { stream: accessLogStream }));
+
 app.use(express.json());
+app.use(mongoSanitize());
+app.use(cors());
 app.use(morgan("dev"));
-app.use("/netflix/api/auth", authRoute);
-app.use("/netflix/api/users", userRoute);
-app.use("/netflix/api/movies", movieRoute);
-app.use("/netflix/api/lists", listRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/movies", movieRoute);
+app.use("/api/lists", listRoute);
 
 app.listen(8800, () => {
   console.log("Backend server is running!");
